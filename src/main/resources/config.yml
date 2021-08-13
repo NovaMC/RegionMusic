@@ -1,0 +1,26 @@
+# Configuration for RegionMusic
+
+# Time in seconds between region checks
+checker-period: 1.0
+# Should we periodically stop vanilla music while a sound event is playing?
+stop-music: true
+
+# The sound events
+events:
+  stal_example:
+    # Minecraft sound to be played
+    # Default: unknown
+    sound: "minecraft:music_disc.stal"
+    # The category to play the sound on
+    # You can find all categories here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/SoundCategory.html
+    # Default: RECORDS
+    category: RECORDS
+    # Whether the sound should loop or not
+    # Default: false
+    loop: true
+    # If looping after how many ticks should we play the sound again
+    # Default: 1200
+    length: 3020
+    # Volume to play the sound at
+    # Default: 1.0
+    volume: 0.75

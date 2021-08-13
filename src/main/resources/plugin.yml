@@ -1,0 +1,14 @@
+name: RegionMusic
+version: @version@
+author: Nova
+api-version: 1.17
+main: xyz.novaserver.regionmusic.RegionMusic
+depend: [WorldGuard]
+commands:
+  rgmusic:
+    permission: rgmusic.admin
+    description: Admin command that reloads the plugin.
+permissions:
+  rgmusic.admin:
+    default: op
+    description: Give permission to admin command.
