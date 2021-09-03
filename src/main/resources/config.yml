@@ -1,7 +1,9 @@
 # Configuration for RegionMusic
 
-# Time in seconds between region checks
-checker-period: 1.0
+# Ticks between region checks
+checker-period: 20
+# Ticks between stopping vanilla music (requires stop-music: true)
+stop-period: 60
 # Should we periodically stop vanilla music while a sound event is playing?
 stop-music: true
 
@@ -24,3 +26,6 @@ events:
     # Volume to play the sound at
     # Default: 1.0
     volume: 0.75
+    # Pitch to play the sound at
+    # Default: 1.0
+    pitch: 1.0

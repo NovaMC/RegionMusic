@@ -19,6 +19,6 @@ public class PlayerMusicTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        player.getRegion().playSound(player.getPlayer());
+        player.playSound();
     }
 }

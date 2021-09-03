@@ -1,8 +1,5 @@
 package xyz.novaserver.regionmusic.task;
 
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import xyz.novaserver.regionmusic.RegionPlayer;
@@ -17,14 +14,11 @@ public class PlayerStopTask extends BukkitRunnable {
     }
 
     public void schedule() {
-        this.runTaskTimerAsynchronously(plugin, 1L, 5 * 20L);
+        this.runTaskTimerAsynchronously(plugin, 1L, plugin.getConfig().getInt("stop-period", 60));
     }
 
     @Override
     public void run() {
-        Player bukkitPlayer = player.getPlayer();
-        bukkitPlayer.stopSound(Sound.MUSIC_GAME, SoundCategory.MUSIC);
-        bukkitPlayer.stopSound(Sound.MUSIC_CREATIVE, SoundCategory.MUSIC);
-        bukkitPlayer.stopSound(Sound.MUSIC_UNDER_WATER, SoundCategory.MUSIC);
+        player.stopGameMusic();
     }
 }

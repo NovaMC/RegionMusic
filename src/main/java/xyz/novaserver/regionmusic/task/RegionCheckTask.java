@@ -33,8 +33,7 @@ public class RegionCheckTask extends BukkitRunnable {
     }
 
     public void schedule() {
-        this.runTaskTimerAsynchronously(plugin, 20L,
-                Math.round(plugin.getConfig().getDouble("checker-period", 1.0D) * 20.0));
+        this.runTaskTimerAsynchronously(plugin, 20L, plugin.getConfig().getInt("checker-period", 20));
     }
 
     @Override
@@ -68,7 +67,7 @@ public class RegionCheckTask extends BukkitRunnable {
                 if (rPlayer.getRegion() == null || !rPlayer.getRegion().getName().equals(soundRegion.getName())) {
                     // Stop the current region music
                     if (rPlayer.getRegion() != null) {
-                        rPlayer.getRegion().stopSound(rPlayer.getPlayer());
+                        rPlayer.stopSound();
                     }
                     // Cancel the player's music task if it exists
                     if (rPlayer.getMusicTask() != null && !rPlayer.getMusicTask().isCancelled()) {
@@ -83,7 +82,11 @@ public class RegionCheckTask extends BukkitRunnable {
                     rPlayer.setRegion(soundRegion);
                     // Play sounds once if not looping otherwise create music task
                     if (!soundRegion.isLoop()) {
-                        soundRegion.playSound(rPlayer.getPlayer());
+                        // Stop in-game music so it doesn't conflict with ours
+                        if (plugin.getConfig().getBoolean("stop-music", true)) {
+                            rPlayer.stopGameMusic();
+                        }
+                        rPlayer.playSound();
                     } else {
                         rPlayer.createMusicTask(plugin);
                     }
@@ -95,13 +98,8 @@ public class RegionCheckTask extends BukkitRunnable {
             }
             // If sound-event isn't set then stop sound and cancel tasks
             else if (regionPlayerMap.containsKey(uuid)) {
-                if (rPlayer.getRegion() != null) {
-                    rPlayer.getRegion().stopSound(rPlayer.getPlayer());
-                } if (rPlayer.getMusicTask() != null && !rPlayer.getMusicTask().isCancelled()) {
-                    rPlayer.getMusicTask().cancel();
-                } if (rPlayer.getStopTask() != null && !rPlayer.getStopTask().isCancelled()) {
-                    rPlayer.getStopTask().cancel();
-                }
+                // Stop music and cancel tasks
+                cancelMusic(rPlayer);
                 rPlayer.setRegion(null);
             }
         });
@@ -109,18 +107,21 @@ public class RegionCheckTask extends BukkitRunnable {
 
     @Override
     public synchronized void cancel() throws IllegalStateException {
-        plugin.getServer().getOnlinePlayers().forEach(player -> {
-            soundRegionMap.values().forEach(soundRegion -> soundRegion.stopSound(player));
-        });
-        regionPlayerMap.values().forEach(rPlayer -> {
-            if (rPlayer.getMusicTask() != null) {
-                rPlayer.getMusicTask().cancel();
-            } if (rPlayer.getStopTask() != null) {
-                rPlayer.getStopTask().cancel();
-            }
-        });
+        // Stop music and cancel tasks
+        regionPlayerMap.values().forEach(this::cancelMusic);
         regionPlayerMap.clear();
         super.cancel();
+    }
+
+    private void cancelMusic(RegionPlayer player) {
+        // Stop music and cancel tasks
+        if (player.getRegion() != null) {
+            player.stopSound();
+        } if (player.getMusicTask() != null && !player.getMusicTask().isCancelled()) {
+            player.getMusicTask().cancel();
+        } if (player.getStopTask() != null && !player.getStopTask().isCancelled()) {
+            player.getStopTask().cancel();
+        }
     }
 
     public Map<UUID, RegionPlayer> getPlayerMap() {

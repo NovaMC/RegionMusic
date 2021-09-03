@@ -49,7 +49,7 @@ public class RegionMusic extends JavaPlugin {
     }
 
     public void reloadPlugin() {
-        final String base = "events";
+        final String base = "events.";
         final Set<SoundRegion> regionSet = new HashSet<>();
 
         reloadConfig();
@@ -59,14 +59,15 @@ public class RegionMusic extends JavaPlugin {
 
         // Loop through events and create SoundRegions
         for (String key : getConfig().getConfigurationSection(base).getKeys(false)) {
-            String sound = getConfig().getString(base + '.' + key + ".sound", "unknown");
-            SoundCategory category = SoundCategory.valueOf(getConfig().getString(base + '.' + key + ".category", "RECORDS").toUpperCase());
-            boolean loop = getConfig().getBoolean(base + '.' + key + ".loop", false);
-            long length = getConfig().getLong(base + '.' + key + ".length", 1200L);
-            float volume = (float) getConfig().getDouble(base + '.' + key + ".volume", 1.0F);
+            String sound = getConfig().getString(base + key + ".sound", "unknown");
+            SoundCategory category = SoundCategory.valueOf(getConfig().getString(base + key + ".category", "RECORDS").toUpperCase());
+            boolean loop = getConfig().getBoolean(base + key + ".loop", false);
+            long length = getConfig().getLong(base + key + ".length", 1200L);
+            float volume = (float) getConfig().getDouble(base + key + ".volume", 1.0F);
+            float pitch = (float) getConfig().getDouble(base + key + ".pitch", 1.0F);
 
             // Make new SoundRegion out of the gathered values
-            regionSet.add(new SoundRegion(key, sound, category, loop, length, volume, this));
+            regionSet.add(new SoundRegion(key, sound, category, loop, length, volume, pitch, this));
         }
 
         checkTask = new RegionCheckTask(this);
