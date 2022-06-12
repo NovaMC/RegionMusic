@@ -24,13 +24,12 @@ public class RegionMusic extends JavaPlugin {
         this.worldGuard = WorldGuard.getInstance();
         FlagRegistry registry = worldGuard.getFlagRegistry();
         try {
-            StringFlag soundFlag = new StringFlag("sound-event", "unknown");
+            StringFlag soundFlag = new StringFlag("sound-event");
             registry.register(soundFlag);
             SOUND_EVENT_FLAG = soundFlag;
         }
         catch (FlagConflictException e) {
-            e.printStackTrace();
-            getLogger().severe("Failed to register sound-event flag! Check for any conflicting plugins!");
+            getSLF4JLogger().error("Failed to register sound-event flag! Check for any conflicting plugins!", e);
         }
     }
 

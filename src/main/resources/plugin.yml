@@ -3,7 +3,7 @@ version: @version@
 author: Nova
 api-version: 1.16
 main: xyz.novaserver.regionmusic.RegionMusic
-depend: [WorldGuard]
+depend: [WorldGuard, NovaMechanics]
 commands:
   rgmusic:
     permission: rgmusic.admin
