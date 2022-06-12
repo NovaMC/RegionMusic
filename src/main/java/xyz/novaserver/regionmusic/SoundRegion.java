@@ -3,8 +3,6 @@ package xyz.novaserver.regionmusic;
 import org.bukkit.SoundCategory;
 
 public class SoundRegion {
-    private final RegionMusic plugin;
-
     // Name of the sound event
     private final String name;
 
@@ -17,7 +15,7 @@ public class SoundRegion {
     private final float pitch;
 
     public SoundRegion(String name, String sound, SoundCategory category,
-                       boolean loop, long length, float volume, float pitch, RegionMusic plugin) {
+                       boolean loop, long length, float volume, float pitch) {
         this.name = name;
         this.sound = sound;
         this.category = category;
@@ -25,7 +23,6 @@ public class SoundRegion {
         this.length = length;
         this.volume = volume;
         this.pitch = pitch;
-        this.plugin = plugin;
     }
 
     public String getName() {

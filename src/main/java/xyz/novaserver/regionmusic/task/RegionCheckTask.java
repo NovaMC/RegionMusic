@@ -51,7 +51,7 @@ public class RegionCheckTask extends BukkitRunnable {
 
             // Create or get a RegionPlayer for the player
             if (!regionPlayerMap.containsKey(uuid)) {
-                rPlayer = new RegionPlayer(player);
+                rPlayer = new RegionPlayer(player, plugin);
                 regionPlayerMap.put(uuid, rPlayer);
             } else {
                 rPlayer = regionPlayerMap.get(uuid);

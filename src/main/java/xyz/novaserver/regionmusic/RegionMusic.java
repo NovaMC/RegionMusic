@@ -67,7 +67,7 @@ public class RegionMusic extends JavaPlugin {
             float pitch = (float) getConfig().getDouble(base + key + ".pitch", 1.0F);
 
             // Make new SoundRegion out of the gathered values
-            regionSet.add(new SoundRegion(key, sound, category, loop, length, volume, pitch, this));
+            regionSet.add(new SoundRegion(key, sound, category, loop, length, volume, pitch));
         }
 
         checkTask = new RegionCheckTask(this);
