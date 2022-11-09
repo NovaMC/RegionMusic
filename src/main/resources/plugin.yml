@@ -3,7 +3,7 @@ version: '1.1-SNAPSHOT'
 author: Lui798
 main: xyz.novaserver.regionmusic.RegionMusic
 api-version: 1.19
-depend: [WorldGuard, NovaCore]
+depend: [WorldGuard, NovaLib]
 commands:
   rgmusic:
     permission: rgmusic.admin

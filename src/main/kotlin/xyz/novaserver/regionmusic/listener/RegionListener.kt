@@ -5,9 +5,9 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import xyz.novaserver.core.event.RegionEnterEvent
-import xyz.novaserver.core.event.RegionExitEvent
-import xyz.novaserver.core.event.RegionInitializeEvent
+import xyz.novaserver.core.paper.event.RegionEnterEvent
+import xyz.novaserver.core.paper.event.RegionExitEvent
+import xyz.novaserver.core.paper.event.RegionInitializeEvent
 import xyz.novaserver.regionmusic.RegionMusic
 import xyz.novaserver.regionmusic.data.RegionPlayer
 import xyz.novaserver.regionmusic.data.SoundEvent
