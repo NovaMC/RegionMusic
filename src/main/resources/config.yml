@@ -1,12 +1,11 @@
 # Configuration for RegionMusic
 
-# Ticks between region checks
-checker-period: 20
-# Ticks between stopping vanilla music (requires stop-music: true)
-stop-period: 80
 # Should we periodically stop vanilla music while a sound event is playing?
 stop-music: true
+# Ticks between stopping vanilla music (requires stop-music: true)
+stop-period: 80
 # List of sounds you want to periodically stop
+# Only stops sounds playing in MUSIC category
 stop-sounds:
   - "minecraft:music.creative"
   - "minecraft:music.end"
@@ -17,14 +16,18 @@ stop-sounds:
   - "minecraft:music.nether.nether_wastes"
   - "minecraft:music.nether.soul_sand_valley"
   - "minecraft:music.nether.warped_forest"
+  - "minecraft:music.overworld.deep_dark"
   - "minecraft:music.overworld.dripstone_caves"
   - "minecraft:music.overworld.frozen_peaks"
   - "minecraft:music.overworld.grove"
   - "minecraft:music.overworld.jagged_peaks"
+  - "minecraft:music.overworld.jungle_and_forest"
   - "minecraft:music.overworld.lush_caves"
   - "minecraft:music.overworld.meadow"
+  - "minecraft:music.overworld.old_growth_taiga"
   - "minecraft:music.overworld.snowy_slopes"
   - "minecraft:music.overworld.stony_peaks"
+  - "minecraft:music.overworld.swamp"
 
 # The sound events
 events:
@@ -33,13 +36,14 @@ events:
     # Default: unknown
     sound: "minecraft:music_disc.stal"
     # The category to play the sound on
-    # You can find all categories here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/SoundCategory.html
+    # You can find all categories here: https://jd.papermc.io/paper/1.19/org/bukkit/SoundCategory.html
     # Default: RECORDS
     category: RECORDS
     # Whether the sound should loop or not
     # Default: false
     loop: true
     # If looping after how many ticks should we play the sound again
+    # Generally you want this to be the length of your sound in seconds * 20
     # Default: 1200
     length: 3020
     # Volume to play the sound at
