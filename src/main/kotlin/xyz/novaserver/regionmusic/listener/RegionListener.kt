@@ -32,10 +32,8 @@ class RegionListener(private val rgmusic: RegionMusic) : Listener {
 
     @EventHandler
     fun onRegionInitialize(event: RegionInitializeEvent) {
+        val regionPlayer = rgmusic.regionPlayerMap[event.player.uniqueId] ?: return
         val soundFlag = event.applicableSet.queryValue(event.player, RegionMusic.SOUND_EVENT_FLAG) ?: "unknown"
-        val regionPlayer = rgmusic.regionPlayerMap[event.player.uniqueId]
-            ?: throw NullPointerException("regionPlayer cannot be null")
-
         runRegionCheck(soundFlag) {
             runRegionEnter(regionPlayer, it)
         }
@@ -43,9 +41,8 @@ class RegionListener(private val rgmusic: RegionMusic) : Listener {
 
     @EventHandler
     fun onRegionEnter(event: RegionEnterEvent) {
+        val regionPlayer = rgmusic.regionPlayerMap[event.player.uniqueId] ?: return
         val soundFlag = event.toSet.queryValue(event.player, RegionMusic.SOUND_EVENT_FLAG) ?: "unknown"
-        val regionPlayer = rgmusic.regionPlayerMap[event.player.uniqueId]
-            ?: throw NullPointerException("regionPlayer cannot be null")
 
         runRegionCheck(soundFlag) {
             runRegionEnter(regionPlayer, it)
@@ -54,9 +51,8 @@ class RegionListener(private val rgmusic: RegionMusic) : Listener {
 
     @EventHandler
     fun onRegionExit(event: RegionExitEvent) {
+        val regionPlayer = rgmusic.regionPlayerMap[event.player.uniqueId] ?: return
         val soundFlag = event.toSet.queryValue(event.player, RegionMusic.SOUND_EVENT_FLAG) ?: "unknown"
-        val regionPlayer = rgmusic.regionPlayerMap[event.player.uniqueId]
-            ?: throw NullPointerException("regionPlayer cannot be null")
 
         runRegionCheck(soundFlag) {
             val currentEvent = regionPlayer.event
